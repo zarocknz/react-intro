@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
+import data from 'data';
+import Table from 'components/table/table';
+import Search from 'components/search/search';
 
 class Homepage extends Component {
-  render () {  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchFieldValue: ''
+    }
+
+    this.searchValueEntered = this.searchValueEntered.bind(this);
+  }
+
+  searchValueEntered(value) {
+    this.setState({
+      searchFieldValue: value
+    });
+  }
+
+  render () {
     return (
       <div className="container-fluid">
         <div className="row mb-3">
@@ -11,12 +30,12 @@ class Homepage extends Component {
         </div>
         <div className="row">
           <div className="col">
-            {/* some controls here later? */}
+            <Search searchValueEntered={this.searchValueEntered} />
           </div>
         </div>
         <div className="row">
           <div className="col">
-            [table goes here]
+            <Table mpData={data} searchFieldValue={this.state.searchFieldValue} />
           </div>
         </div>
         <div className="row mt-3">
